@@ -2,6 +2,20 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.7.
 
+## 1. Create Angular Elements project
+
+ng new angular-elements
+cd angular-elements
+// ng add @angular/material
+
+## 2. Crear export project
+
+ng generate application external-elements
+ng add @angular/elements
+ng add ngx-build-plus --project external-elements
+ng g ngx-build-plus:wc-polyfill --project external-elements
+ng build --prod --single-bundle --project external-elements
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.

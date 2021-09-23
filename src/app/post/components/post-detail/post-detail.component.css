@@ -1,0 +1,24 @@
+/*------------------------------------------------------------------
+[PostDetail]
+-------------------------------------------------------------------*/
+
+:host .header-wrapper {
+  background-color: #eee;
+  font-size: 0.85em;
+  padding: 1rem 2rem;
+}
+
+:host .section-wrapper {
+  padding: 1rem 2rem 2rem;
+}
+
+:host .section-wrapper .section-content .post-author {
+  color: #999;
+  font-size: smaller;
+}
+
+:host .section-wrapper .section-content .post-image {
+  height: auto;
+  margin: 1rem 0;
+  width: 100%;
+}

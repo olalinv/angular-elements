@@ -37,7 +37,7 @@
                 }
               ],
               "optimization": true,
-              "outputHashing": "all",
+              "outputHashing": "none",
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
@@ -119,6 +119,133 @@
           }
         }
       }
-    }},
+    },
+    "external-elements": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/external-elements",
+      "sourceRoot": "projects/external-elements/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "ngx-build-plus:browser",
+          "options": {
+            "outputPath": "dist/external-elements",
+            "index": "projects/external-elements/src/index.html",
+            "main": "projects/external-elements/src/main.ts",
+            "polyfills": "projects/external-elements/src/polyfills.ts",
+            "tsConfig": "projects/external-elements/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/external-elements/src/favicon.ico",
+              "projects/external-elements/src/assets"
+            ],
+            "styles": [
+              "projects/external-elements/src/styles.css"
+            ],
+            "scripts": [
+              {
+                "bundleName": "polyfill-webcomp-es5",
+                "input": "node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js"
+              },
+              {
+                "bundleName": "polyfill-webcomp",
+                "input": "node_modules/@webcomponents/webcomponentsjs/bundles/webcomponents-sd-ce-pf.js"
+              }
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/external-elements/src/environments/environment.ts",
+                  "with": "projects/external-elements/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "none",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "ngx-build-plus:dev-server",
+          "options": {
+            "browserTarget": "external-elements:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "external-elements:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "external-elements:build"
+          }
+        },
+        "test": {
+          "builder": "ngx-build-plus:karma",
+          "options": {
+            "main": "projects/external-elements/src/test.ts",
+            "polyfills": "projects/external-elements/src/polyfills.ts",
+            "tsConfig": "projects/external-elements/tsconfig.spec.json",
+            "karmaConfig": "projects/external-elements/karma.conf.js",
+            "assets": [
+              "projects/external-elements/src/favicon.ico",
+              "projects/external-elements/src/assets"
+            ],
+            "styles": [
+              "projects/external-elements/src/styles.css"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/external-elements/tsconfig.app.json",
+              "projects/external-elements/tsconfig.spec.json",
+              "projects/external-elements/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/external-elements/e2e/protractor.conf.js",
+            "devServerTarget": "external-elements:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "external-elements:serve:production"
+            }
+          }
+        }
+      }
+    }
+  },
   "defaultProject": "angular-elements"
 }

@@ -26,19 +26,19 @@ export class PostDetailComponent implements OnInit {
     });
   }
 
+  public ngOnChanges(changes: SimpleChanges) {
+    if (changes.id && changes.id.currentValue) {
+      this.getPost(changes.id.currentValue);
+    }
+  }
+
   public ngOnInit(): void {
     this.getPost(this.id);
   }
 
-  public ngOnChanges(changes: SimpleChanges) {
-    this.getPost(changes.id.currentValue);
-  }
-
   public getPost = (id: string): void => {
     this.postService.get(id).subscribe((post: Post) => {
-      this.post = post;
-    }, (error: string) => {
-      console.log(error);
+      this.post = post
     });
   }
 

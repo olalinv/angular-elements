@@ -14,7 +14,7 @@ ng generate application external-elements
 ng add @angular/elements
 ng add ngx-build-plus --project external-elements
 ng g ngx-build-plus:wc-polyfill --project external-elements
-ng build --prod --single-bundle --project external-elements
+ng build --configuration production --single-bundle --project external-elements
 
 ## Development server
 
